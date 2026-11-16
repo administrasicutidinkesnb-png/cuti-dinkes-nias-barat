@@ -29,6 +29,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--font);-w
 img,svg{display:block}
 a{color:var(--accent-deep)}
 button,input,select{font:inherit;color:inherit}
+html,body{overflow-x:clip}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--marker);outline-offset:2px;border-radius:6px}
 h1,h2,h3,h4{line-height:1.2;margin:0;letter-spacing:-.01em;text-wrap:balance}
@@ -404,7 +405,7 @@ footer .survey-link+.survey-link{margin-left:18px}
   .fab-survey:focus-visible,.fab-wa:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
   .fab-survey.compact,.fab-wa.compact{padding:0 12px;gap:0}
   .fab-survey.compact .fl,.fab-wa.compact .fl{max-width:0;opacity:0}
-  body[data-view="survei"] .fab-survey{display:none}
+  body[data-view="survei"] .fab-survey,body[data-view="unggah"] .fab-survey,body[data-view="unggah"] .fab-wa{display:none}
 }
 @media print{.fab-survey,.fab-wa{display:none!important}}
 
@@ -436,6 +437,45 @@ footer .survey-link+.survey-link{margin-left:18px}
 .sv-empty{margin-top:16px;padding:12px 14px;border-radius:var(--r-m);background:#FFF4D6;color:#5B4300;font-size:13.5px}
 @media (prefers-reduced-motion:reduce){.sv-bars .bar i{transition:none}}
 @media (max-width:760px){.sv-sum{grid-template-columns:1fr 1fr}.sv-sum .sv-stat:first-child{grid-column:1/-1}.sv-bars li{grid-template-columns:40px minmax(0,1fr) 78px}.sv-units li{grid-template-columns:minmax(0,1fr) 70px;row-gap:4px}.sv-units li .bar{grid-column:1/-1;grid-row:2}.sv-units .dv{grid-column:2;grid-row:1}}
+
+/* ---------- unggah dokumen ---------- */
+.upload{max-width:720px}
+.upload .form{margin-top:22px}
+.upload .req{color:#B42318;font-weight:700}
+.upload .err{font-size:12.5px;color:#B42318;min-height:1em}
+.upload .input[aria-invalid=true]{border-color:#B42318}
+.upload select.input{appearance:none;-webkit-appearance:none;padding-right:38px;background:#FBFCFE url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235A6078' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center}
+.upload .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.drop{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:22px 16px;border:2px dashed var(--line);border-radius:var(--r-m);background:#FBFCFE;cursor:pointer;transition:border-color .15s,background-color .15s}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--accent-tint)}
+.drop:has(input:focus-visible){outline:3px solid var(--marker);outline-offset:2px}
+.drop[aria-invalid=true]{border-color:#B42318}
+.drop svg{width:30px;height:30px;color:var(--accent)}
+.drop b{font-size:14.5px}
+.drop span{font-size:12.5px;color:var(--ink2)}
+.drop input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.up-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.up-list li{display:flex;align-items:center;gap:10px;padding:8px 10px 8px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:13.5px}
+.up-list .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.up-list .sz{color:var(--ink2);font-size:12.5px;flex:none;font-variant-numeric:tabular-nums}
+.up-list button{flex:none;width:32px;height:32px;border:0;border-radius:8px;background:transparent;color:var(--ink2);cursor:pointer;display:grid;place-items:center}
+.up-list button:hover{background:var(--line2);color:#B42318}
+.up-list button svg{width:16px;height:16px}
+.up-total{font-size:12.5px;color:var(--ink2);margin-top:8px}
+.up-banner{margin-top:16px;padding:12px 14px;border-radius:var(--r-m);background:#FDECEA;color:#8A1C12;font-size:13.5px}
+.up-banner a{color:inherit;font-weight:700}
+.upload-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:20px}
+.upload-actions .btn[disabled]{opacity:.7;cursor:progress}
+.up-status{font-size:13.5px;color:var(--ink2);display:none;align-items:center;gap:8px}
+.up-status.on{display:flex}
+.spin{width:16px;height:16px;border:2.5px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.up-note{font-size:12.5px;color:var(--ink2);margin-top:14px}
+.up-ref{display:inline-block;margin:2px 0 14px;padding:8px 14px;border-radius:10px;background:var(--line2);font-weight:700;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:2s}}
+@media (max-width:760px){.upload .form{grid-template-columns:1fr}}
+
+@media (max-width:380px){.nav a{font-size:9.5px;letter-spacing:-.02em}}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);background:var(--surface)}
@@ -519,7 +559,7 @@ dialog::backdrop{background:rgba(20,24,44,.5)}
 @media (max-width:900px){
   body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
   .bar{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff}
-  .nav{position:fixed;left:0;right:0;bottom:0;margin:0;display:grid;grid-template-columns:repeat(7,1fr);gap:0;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:40}
+  .nav{position:fixed;left:0;right:0;bottom:0;margin:0;display:grid;grid-template-columns:repeat(8,1fr);gap:0;background:rgba(255,255,255,.97);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:40}
   .nav a{flex-direction:column;gap:3px;padding:6px 1px;border-radius:12px;font-size:11px;font-weight:600}
   .nav a svg{display:block;width:21px;height:21px}
   .nav a[aria-current=page]{background:var(--accent-tint);color:var(--accent-deep)}
@@ -548,8 +588,8 @@ dialog::backdrop{background:rgba(20,24,44,.5)}
   .brand small{display:none}
   .brand b{font-size:13.5px}
   .brand-logo{width:36px;height:36px}
-  .nav{position:fixed;left:0;right:0;bottom:0;margin:0;display:grid;grid-template-columns:repeat(7,1fr);gap:0;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:40}
-  .nav a{flex-direction:column;gap:3px;padding:6px 1px;border-radius:12px;font-size:10.5px;font-weight:600}
+  .nav{position:fixed;left:0;right:0;bottom:0;margin:0;display:grid;grid-template-columns:repeat(8,1fr);gap:0;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:40}
+  .nav a{flex-direction:column;gap:3px;padding:6px 0;border-radius:12px;font-size:10px;font-weight:600;letter-spacing:-.01em;min-width:0}
   .nav a svg{display:block;width:21px;height:21px}
   .nav a[aria-current=page]{background:var(--accent-tint);color:var(--accent-deep)}
   .nav .l{display:none}
@@ -624,6 +664,7 @@ dialog::backdrop{background:rgba(20,24,44,.5)}
       <a href="#cari" data-view="cari"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><span class="l">Cari cuti</span><span class="s">Cari</span></a>
       <a href="#jenis" data-view="jenis"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1.3" fill="currentColor"/><circle cx="4.5" cy="12" r="1.3" fill="currentColor"/><circle cx="4.5" cy="18" r="1.3" fill="currentColor"/></svg><span class="l">Jenis cuti</span><span class="s">Jenis</span></a>
       <a href="#syarat" data-view="syarat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 4V2.8h6V4M8.5 10.5l1.6 1.6 3-3M8.5 16h7"/></svg><span class="l">Syarat &amp; dokumen</span><span class="s">Syarat</span></a>
+      <a href="#unggah" data-view="unggah"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15.5V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5V19h14v-4.5"/></svg><span class="l">Unggah</span><span class="s">Unggah</span></a>
       <a href="#hitung" data-view="hitung"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4.5" width="16" height="16" rx="2.5"/><path d="M4 9.5h16M8.5 2.5v4M15.5 2.5v4"/><path d="M8.5 14h2M13.5 14h2M8.5 17h2" stroke-linecap="round"/></svg><span class="l">Hitung</span><span class="s">Hitung</span></a>
       <a href="#alur" data-view="alur"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="5.5" cy="6" r="2.5"/><circle cx="18.5" cy="18" r="2.5"/><path d="M8 6h6.5a3.5 3.5 0 0 1 0 7h-5a3.5 3.5 0 0 0 0 7H16"/></svg><span class="l">Alur</span><span class="s">Alur</span></a>
       <a href="#tanya" data-view="tanya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.6 2.6 0 0 1 5 .8c0 1.7-2.5 2.2-2.5 3.7"/><circle cx="12" cy="17.2" r=".6" fill="currentColor"/></svg><span class="l">Tanya jawab</span><span class="s">Tanya</span></a>
@@ -709,6 +750,7 @@ dialog::backdrop{background:rgba(20,24,44,.5)}
     <div class="sy-grid" id="sy-grid"></div>
     <div class="sec-h"><h2>Format dokumen</h2><p>Format surat dan formulir untuk diisi.</p></div>
     <ul class="fmt" id="fmt-list"></ul>
+    <div class="survey-cta"><div><b>Dokumen sudah lengkap?</b><span>Unggah dokumen cuti Anda langsung ke pengelola kepegawaian.</span></div><a class="btn btn-main" href="#unggah">Unggah dokumen</a></div>
   </div>
 </section>
 
@@ -879,6 +921,63 @@ dialog::backdrop{background:rgba(20,24,44,.5)}
       <h2 id="sv-hasil-t" tabindex="-1">Grafik kepuasan layanan</h2>
       <p>Ringkasan penilaian pengguna. Hanya angka gabungan yang ditampilkan; nama dan isi saran tidak dipublikasikan.</p>
       <div id="sv-hasil-body" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== UNGGAH DOKUMEN ===================== -->
+<section class="view" id="v-unggah" data-label="Unggah dokumen cuti" aria-labelledby="t-unggah" hidden>
+  <div class="wrap vpad">
+    <div class="vhead">
+      <h1 id="t-unggah" tabindex="-1">Unggah dokumen cuti</h1>
+      <p>Kirim dokumen pengajuan cuti Anda langsung ke pengelola kepegawaian. Pastikan dokumen lengkap dan terbaca jelas.</p>
+    </div>
+    <div class="panel upload">
+      <form id="up-form" novalidate autocomplete="off">
+        <div class="form">
+          <div class="field">
+            <label for="up-nama">Nama <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="up-nama" type="text" maxlength="80" autocomplete="name" placeholder="Nama lengkap" required aria-describedby="up-nama-err">
+            <span class="err" id="up-nama-err" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="up-unit">Instansi / unit kerja <span class="req" aria-hidden="true">*</span></label>
+            <input class="input" id="up-unit" type="text" maxlength="100" placeholder="Contoh: UPTD Puskesmas, RSUD, Dinas Kesehatan" required aria-describedby="up-unit-err">
+            <span class="err" id="up-unit-err" role="alert"></span>
+          </div>
+          <div class="field full">
+            <label for="up-jenis">Jenis cuti <span class="req" aria-hidden="true">*</span></label>
+            <select class="input" id="up-jenis" required aria-describedby="up-jenis-err"></select>
+            <span class="err" id="up-jenis-err" role="alert"></span>
+          </div>
+          <div class="field full">
+            <span class="lbl" id="up-file-lbl">Dokumen <span class="req" aria-hidden="true">*</span></span>
+            <label class="drop" id="up-drop" aria-describedby="up-file-err">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15.5V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5V19h14v-4.5"/></svg>
+              <b>Pilih file atau foto dokumen</b>
+              <span>PDF, JPG, PNG, DOC, DOCX. Maksimal 5 file, 5 MB per file.</span>
+              <input type="file" id="up-file" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" aria-labelledby="up-file-lbl">
+            </label>
+            <span class="err" id="up-file-err" role="alert"></span>
+            <ul class="up-list" id="up-list" aria-label="File yang dipilih"></ul>
+            <p class="up-total" id="up-total" hidden></p>
+          </div>
+          <div class="hp" aria-hidden="true"><label>Jangan diisi<input type="text" id="up-hp" tabindex="-1" autocomplete="off"></label></div>
+        </div>
+        <div class="up-banner" id="up-banner" role="alert" hidden></div>
+        <div class="upload-actions">
+          <button class="btn btn-main" type="submit" id="up-submit">Unggah dokumen</button>
+          <span class="up-status" id="up-status" role="status" aria-live="polite"><i class="spin" aria-hidden="true"></i><span>Mengunggah, jangan tutup halaman ini…</span></span>
+        </div>
+        <p class="up-note">Dokumen hanya dapat dibuka oleh pengelola kepegawaian Dinas Kesehatan. Simpan nomor referensi yang muncul setelah unggah sebagai bukti.</p>
+      </form>
+      <div class="survey-done" id="up-done" hidden>
+        <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h2 tabindex="-1" id="up-done-title">Dokumen berhasil dikirim</h2>
+        <p id="up-done-text"></p>
+        <div class="up-ref" id="up-done-ref"></div>
+        <div><button class="btn btn-line" type="button" id="up-again">Unggah dokumen lain</button></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1272,7 +1371,7 @@ if(!SITUASI.some(s=>s.id===state.situasi)) state.situasi="istirahat";
 /* =========================================================
    NAVIGASI LAYAR (hash router)
    ========================================================= */
-const VIEWS=["cari","jenis","syarat","hitung","alur","tanya","panduan","survei"];
+const VIEWS=["cari","jenis","syarat","hitung","alur","tanya","panduan","survei","unggah"];
 function showView(v,focus=true){
   if(!VIEWS.includes(v)) v="cari";
   const changed=state.view!==v;
@@ -1799,13 +1898,106 @@ if(IS_MOBILE){
   });
 })();
 
+/* =========================================================
+   UNGGAH DOKUMEN CUTI -> Google Drive (lewat Apps Script)
+   ========================================================= */
+const UP_MAX_FILES = 5, UP_MAX_FILE = 5*1024*1024, UP_MAX_TOTAL = 8*1024*1024;
+const UP_EXT = ["pdf","jpg","jpeg","png","doc","docx"];
+const fmtSize = b => b>=1048576 ? (b/1048576).toFixed(1).replace(".",",")+" MB" : Math.max(1,Math.round(b/1024))+" KB";
+const extOf = n => (n.split(".").pop()||"").toLowerCase();
+
+/* Kecilkan foto besar (HP) agar muat batas ukuran; PDF/Word tidak diubah. */
+async function shrinkImage(file){
+  if(!/^image\/(jpeg|png)$/.test(file.type)||file.size<1.2*1048576) return file;
+  try{
+    const bmp=await createImageBitmap(file), k=Math.min(1,2200/Math.max(bmp.width,bmp.height));
+    const c=document.createElement("canvas"); c.width=Math.round(bmp.width*k); c.height=Math.round(bmp.height*k);
+    const x=c.getContext("2d"); x.fillStyle="#fff"; x.fillRect(0,0,c.width,c.height); x.drawImage(bmp,0,0,c.width,c.height);
+    const blob=await new Promise(r=>c.toBlob(r,"image/jpeg",.85));
+    if(blob&&blob.size<file.size) return new File([blob],file.name.replace(/\.\w+$/,"")+".jpg",{type:"image/jpeg"});
+  }catch(err){}
+  return file;
+}
+const readB64 = file => new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(",")[1]||"");r.onerror=()=>rej(r.error);r.readAsDataURL(file)});
+
+function initUpload(){
+  const form=$("#up-form"); if(!form) return;
+  const files=[]; const q=id=>$("#up-"+id);
+  const sel=q("jenis");
+  const opt=(v,t)=>`<option value="${esc(v)}">${esc(t)}</option>`;
+  sel.innerHTML=opt("","Pilih jenis cuti")+
+    ["pns","pppk"].map(st=>`<optgroup label="${st.toUpperCase()}">${Object.values(LEAVES[st]).map(L=>opt(st.toUpperCase()+" - "+L.nama,L.nama)).join("")}</optgroup>`).join("")+
+    `<optgroup label="Lainnya">${opt("Lainnya","Lainnya / belum yakin")}</optgroup>`;
+
+  const setErr=(k,m)=>{const el=q(k+"-err"); if(el) el.textContent=m; const i=q(k); if(i) i.setAttribute("aria-invalid",m?"true":"false"); if(k==="file") q("drop").setAttribute("aria-invalid",m?"true":"false")};
+  const banner=m=>{const b=q("banner"); b.hidden=!m; b.innerHTML=m||""};
+  const total=()=>files.reduce((a,f)=>a+f.size,0);
+
+  function render(){
+    q("list").innerHTML=files.map((f,i)=>`<li><span class="nm" title="${esc(f.name)}">${esc(f.name)}</span><span class="sz">${fmtSize(f.size)}</span><button type="button" data-rm="${i}" aria-label="Hapus ${esc(f.name)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></li>`).join("");
+    const t=q("total"); t.hidden=!files.length; t.textContent=`${files.length} file · ${fmtSize(total())} dari maksimal ${fmtSize(UP_MAX_TOTAL)}`;
+  }
+  async function add(list){
+    setErr("file",""); banner("");
+    const problems=[];
+    for(const raw of list){
+      if(!UP_EXT.includes(extOf(raw.name))){problems.push(`${raw.name}: jenis file tidak didukung.`);continue}
+      if(files.length>=UP_MAX_FILES){problems.push(`Maksimal ${UP_MAX_FILES} file.`);break}
+      const f=await shrinkImage(raw);
+      if(f.size>UP_MAX_FILE){problems.push(`${raw.name}: ukuran melebihi ${fmtSize(UP_MAX_FILE)}.`);continue}
+      if(total()+f.size>UP_MAX_TOTAL){problems.push(`${raw.name}: total ukuran melebihi ${fmtSize(UP_MAX_TOTAL)}.`);continue}
+      if(files.some(x=>x.name===f.name&&x.size===f.size)) continue;
+      files.push(f);
+    }
+    render(); if(problems.length) setErr("file",[...new Set(problems)].join(" "));
+  }
+  q("file").addEventListener("change",async e=>{await add([...e.target.files]); e.target.value=""});
+  q("list").addEventListener("click",e=>{const b=e.target.closest("[data-rm]"); if(!b) return; files.splice(Number(b.dataset.rm),1); render(); setErr("file","")});
+  const drop=q("drop");
+  ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over")}));
+  ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over")}));
+  drop.addEventListener("drop",e=>add([...(e.dataTransfer&&e.dataTransfer.files||[])]));
+  ["nama","unit","jenis"].forEach(k=>{const el=q(k); el&&el.addEventListener("input",()=>setErr(k,"")); el&&el.addEventListener("change",()=>setErr(k,""))});
+
+  const reset=()=>{form.reset(); files.length=0; render(); ["nama","unit","jenis","file"].forEach(k=>setErr(k,"")); banner("")};
+  q("again").addEventListener("click",()=>{reset(); q("done").hidden=true; form.hidden=false; q("nama").focus()});
+
+  form.addEventListener("submit",async e=>{
+    e.preventDefault(); if(q("hp").value) return;
+    const nama=q("nama").value.replace(/\s+/g," ").trim(), unit=q("unit").value.replace(/\s+/g," ").trim(), jenis=q("jenis").value;
+    let bad=null;
+    if(nama.length<2){setErr("nama","Nama wajib diisi.");bad=bad||q("nama")}
+    if(unit.length<2){setErr("unit","Instansi atau unit kerja wajib diisi.");bad=bad||q("unit")}
+    if(!jenis){setErr("jenis","Pilih jenis cuti.");bad=bad||q("jenis")}
+    if(!files.length){setErr("file","Pilih minimal satu dokumen.");bad=bad||q("drop")}
+    if(bad){(bad.focus||(()=>{})).call(bad);return}
+    if(!SURVEY_ENDPOINT){banner("Fitur unggah belum diaktifkan oleh pengelola.");return}
+    banner(""); const btn=q("submit"), st=q("status"); btn.disabled=true; st.classList.add("on");
+    const ctl=new AbortController(), timer=setTimeout(()=>ctl.abort(),180000);
+    try{
+      const payload={aksi:"unggah",nama,unit,jenis,files:await Promise.all(files.map(async f=>({nama:f.name,tipe:f.type,data:await readB64(f)})))};
+      const res=await fetch(SURVEY_ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload),signal:ctl.signal});
+      const out=await res.json();
+      if(!out||out.ok!==true){
+        if(out&&out.error==="batas"){banner(`Terlalu banyak unggahan dalam satu jam terakhir. Coba lagi beberapa saat lagi, atau hubungi <a href="https://wa.me/${SURVEY_WA}">WhatsApp pengelola</a>.`);return}
+        throw new Error((out&&out.error)||"gagal");
+      }
+      q("done-text").textContent=`${out.jumlah||files.length} dokumen atas nama ${nama} sudah diterima pengelola kepegawaian.`;
+      q("done-ref").textContent="Nomor referensi: "+(out.ref||"-");
+      form.hidden=true; q("done").hidden=false; q("done-title").focus(); toast("Dokumen berhasil dikirim");
+    }catch(err){
+      banner(`Dokumen belum terkirim. Periksa koneksi internet lalu coba lagi. Jika tetap gagal, hubungi <a href="https://wa.me/${SURVEY_WA}">WhatsApp ${"0"+SURVEY_WA.slice(2,5)}-${SURVEY_WA.slice(5,9)}-${SURVEY_WA.slice(9)}</a>.`);
+    }finally{clearTimeout(timer); btn.disabled=false; st.classList.remove("on")}
+  });
+}
+
 window.addEventListener("hashchange",route);
 
 /* =========================================================
    MULAI
    ========================================================= */
 document.addEventListener("DOMContentLoaded",()=>{
-  renderChips();renderFlow();renderFAQ();renderSyarat();initSurvey();
+  renderChips();renderFlow();renderFAQ();renderSyarat();initSurvey();initUpload();
   setStatus(state.status,true);initCalc();renderGallery();
   route();document.body.dataset.ready="1";
 });
